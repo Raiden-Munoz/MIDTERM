@@ -147,6 +147,7 @@ int main()
     return 0;
 }
 */
+/*
 #include <stdio.h>
 #inlclude <stdlib.h>
 #include <unistd.h>
@@ -171,3 +172,27 @@ wait (NULL);
 exit (0);
 }
 }
+*/
+using System;
+using System.Diagnostics;
+class Program
+{
+static void Main()
+{
+Process childProcess;
+childProcess = Process.Start("whoami");
+if (childProcess == null)
+{
+Console.WriteLine("Process creation failed");
+}
+else if (childProcess != null)
+{
+Console.WriteLine("Process ID is: " + Process.GetCurrentProcess().Id);
+childProcess.WaitForExit();
+//Raiden Cay Munoz 2Cpe-2B
+}
+}
+}
+Sample Output:
+Figure 1. C# Process Calling
+2
