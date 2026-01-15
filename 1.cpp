@@ -198,6 +198,7 @@ Sample Output:
 Figure 1. C# Process Calling
 2
 */
+/*
 # Programming
 Source Code:
 using System;
@@ -223,4 +224,82 @@ childProcess.WaitForExit();
 Sample Output:
 Figure 1. C# Process Calling
 2
+*/
+#include <iostream>
+using namespace std;
+int main()
+{
+int bt[10];
+int rem[10];
+int wt[10];
+int tat[10];
+int n;
+int tq;
+int i;
+int time = 0;
+int count = 0;
+1
+University of the East
+College of Engineering
+Prepared for:
+Engr. Marjon Umbay
+Faculty, CpE Department
+Subject code: NCP
+22_09: Operating
+System Laboratory
+Section: 2CPE - 2B Date: January 14, 2026
+Prepared by: Muñoz, Raiden C. Activity No.: 3
+float wtavg = 0;
+float tatavg = 0;
+cout << "Enter number of processes: ";
+cin >> n;
+for(i = 0; i < n; i++)
+{
+cout << "Enter Burst Time for P" << i << ": ";
+cin >> bt[i];
+rem[i] = bt[i];
+wt[i] = 0;
+}
+cout << "Enter Time Quantum: ";
+cin >> tq;
+for(i = 0; count < n; i++)
+{
+if(i == n)
+i = 0;
+if(rem[i] > 0)
+{
+if(rem[i] > tq)
+{
+rem[i] = rem[i] - tq;
+2
+time = time + tq;
+}
+else
+{
+time = time + rem[i];
+wt[i] = time - bt[i];
+rem[i] = 0;
+count++;
+}
+}
+}
+for(i = 0; i < n; i++)
+{
+tat[i] = bt[i] + wt[i];
+wtavg = wtavg + wt[i];
+tatavg = tatavg + tat[i];
+}
+cout << "\nPROCESS\tBT\tWT\tTAT";
+for(i = 0; i < n; i++)
+{
+cout << "\nP" << i << "\t" << bt[i]
+<< "\t" << wt[i]
+<< "\t" << tat[i];
+}
+3
+cout << "\n\nAverage Waiting Time = " << wtavg / n;
+cout << "\nAverage Turnaround Time = " << tatavg / n;
+return 0;
+}
+Sample Output:
 
