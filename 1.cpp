@@ -225,6 +225,7 @@ Sample Output:
 Figure 1. C# Process Calling
 2
 */
+/*
 #include <iostream>
 using namespace std;
 int main()
@@ -302,4 +303,64 @@ cout << "\nAverage Turnaround Time = " << tatavg / n;
 return 0;
 }
 Sample Output:
+*/
+include <iostream>
+using namespace std;
+int main()
+{
+int bt[10], wt[10], tat[10], pr[10], at[10];
+int finished[10] = {0};
+int n, i, j, time = 0, done;
+float wtavg = 0, tatavg = 0;
+cout << "Number of processes: ";
+cin >> n;
+for(i = 0; i < n; i++)
+{
+cout << "Burst time for P" << i << ": ";
+cin >> bt[i];
+cout << "Arrival time for P" << i << ": ";
+cin >> at[i];
+5
+cout << "Priority for P" << i << " (higher = more important): ";
+cin >> pr[i];
+wt[i] = 0;
+tat[i] = 0;
+}
+for(done = 0; done < n; done++)
+{
+int highest = -1;
+// hi-prio
+for(i = 0; i < n; i++) {
+if(finished[i] == 0 && at[i] <= time) {
+if(highest == -1 || pr[i] > pr[highest]) {
+highest = i;
+}
+}
+}
+if(highest == -1) {
+time = time + 1;
+done = done - 1;
+} else {
+wt[highest] = time - at[highest];
+time = time + bt[highest];
+tat[highest] = wt[highest] + bt[highest];
+finished[highest] = 1;
+6
+}
+}
+for(i = 0; i < n; i++)
+{
+wtavg += wt[i];
+tatavg += tat[i];
+}
+cout << "\nProcess\tBT\tAT\tPR\tWT\tTAT\n";
+for(i = 0; i < n; i++)
+{
+cout << "P" << i << "\t" << bt[i] << "\t" << at[i] << "\t" << pr[i]
+<< "\t" << wt[i] << "\t" << tat[i] << "\n";
+}
+cout << "\nAverage Waiting Time = " << wtavg / n;
+cout << "\nAverage Turnaround Time = " << tatavg / n;
+return 0;
+}
 
