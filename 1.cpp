@@ -1,4 +1,4 @@
-/*
+/*test dendi
 //Create a C++ program that allows the user to enter 10 integers and display these integers from the last entered to the first entered integer using array.
 
 #include<iostream>
